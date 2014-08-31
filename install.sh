@@ -86,6 +86,7 @@ set_profile_colors() {
   local bg_color_file=$dir/colors/bg_color
   local fg_color_file=$dir/colors/fg_color
   local bd_color_file=$dir/colors/bd_color
+  local bg_darkness=$dir/colors/bg_darkness
 
   if [ "$newGnome" = "1" ]
     then local profile_path=$dconfdir/$profile
@@ -114,6 +115,9 @@ set_profile_colors() {
     gconftool-2 -s -t string $profile_path/bold_color       $(cat $bd_color_file)
     gconftool-2 -s -t string $profile_path/background_color $(cat $bg_color_file)
     gconftool-2 -s -t string $profile_path/foreground_color $(cat $fg_color_file)
+
+	# set background darkness
+	gconftool-2 -s -t float $profile_path/background_darkness $(cat $bg_darkness)
 
     # make sure the profile is set to not use theme colors
     gconftool-2 -s -t bool $profile_path/use_theme_colors false
